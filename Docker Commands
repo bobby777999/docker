@@ -1,0 +1,7 @@
+docker ps (List containers)
+docker --version
+brew cask install docker(if docker wont install normally or cannot connect to daemon)
+
+
+docker pull docker.io/hello-world (Pull images)
+
