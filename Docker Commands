@@ -1,7 +1,13 @@
-docker ps (List containers)
-docker --version
 brew cask install docker(if docker wont install normally or cannot connect to daemon)
 
+-----------------------
 
+docker ps (List containers)
+docker --version
 docker pull docker.io/hello-world (Pull images)
+dokcer image inspect hello-world
+docker run -it hello-world   (Create container from image hello-world)
+docker container ls -a (List container in detail)
+docker container rm <id/name>
 
+Ex: docker run -d --name locahostmac -p 70:80 spacebones/doge   #(Start a container names localhostmac with image spacebones/doge accessble on loaclhost:70)
