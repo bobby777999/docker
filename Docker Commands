@@ -130,3 +130,11 @@ EXPOSE 4505 4506
 ONBUILD CMD /docker-entrypoint.sh
 
 --Finally execute this   "docker build -t salt:master ."
+
+----------------------------
+5Q) Some files are causing issues or corrupted. How do you ignore those files during builds?
+A) Create a .dockerignore file and include those file inside (badscript.sh and all .conf files)
+ex: vi .dockerignore
+ - badscript.sh
+ *.conf
+ ---------------
