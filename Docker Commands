@@ -71,5 +71,5 @@ A) There is 2 ways you can do
   - Enter the command now 
   "docker build -t baconator:dev . "     #(. is everything inside from present host directory)
   
-  -Finally, docker run -d -p 60:8081 baconator:dev
+  -Finally, docker run -d -p 60:8081 baconator:dev         #(Run in daemon mode as its a static website)
   - Check localhost:60 or (curl localhost:80)
