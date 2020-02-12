@@ -23,7 +23,7 @@ A)
 docker pull docker.io/spacebones/doge  #(Pull the image called "docker.io/spacebones/doge")
 
 docker run -d --name locahostmac -p 80:80 spacebones/doge  #(Create container from image and name container "localhostmac", portforward on local host 80 from container port 80)
-
+-----------------------------------------------------------------------------------------------------------------------------
 2Q) Now use a centos:6 image and copy the contents website content of spacebones/doge and spin a container
 A) There is 2 ways you can do 
  - Log in to container install/download and then commit the image as different name
@@ -73,3 +73,60 @@ A) There is 2 ways you can do
   
   -Finally, docker run -d -p 60:8081 baconator:dev         #(Run in daemon mode as its a static website)
   - Check localhost:60 or (curl localhost:80)
+------------------------------------------------------------------------------------------------------------------------
+
+5Q) Modify an image such that when you build a child image referencing this then only the commands will be executed. But if you
+refer the original image and build container the commands shouldnt be executed.
+
+A) Git link:
+https://github.com/linuxacademy/content-dockerquest-spacebones >saltmaster>salt-example
+-Change the Docker file from
+
+FROM jarfil/salt-master-mini:debian-stretch
+
+MAINTAINER Jaroslaw Filiochowski <jarfil@gmail.com>
+
+COPY . /
+
+RUN apt-get -y update && \
+	apt-get -y upgrade && \
+	apt-get -y install \
+		salt-minion \
+		salt-ssh \
+		salt-cloud && \
+	apt-get -y autoremove && \
+	apt-get clean && \
+	rm -rf /var/lib/apt/lists/
+
+RUN chmod +x \
+	/docker-entrypoint.sh
+
+EXPOSE 4505 4506
+
+CMD /docker-entrypoint.sh
+
+---Change to----
+FROM jarfil/salt-master-mini:debian-stretch
+
+MAINTAINER Jaroslaw Filiochowski <jarfil@gmail.com>
+
+COPY . /
+
+RUN apt-get -y update && \
+	apt-get -y upgrade && \
+	apt-get -y install \
+		salt-minion \
+		salt-ssh \
+		salt-cloud && \
+	apt-get -y autoremove && \
+	apt-get clean && \
+	rm -rf /var/lib/apt/lists/
+
+ONBUILD RUN chmod +x \
+	/docker-entrypoint.sh
+
+EXPOSE 4505 4506
+
+ONBUILD CMD /docker-entrypoint.sh
+
+--Finally execute this   "docker build -t salt:master ."
