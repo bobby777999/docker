@@ -48,3 +48,28 @@ A) There is 2 ways you can do
   - docker history <imagename>
   - docker inspect <imagename>
   
+ ----------Things to understand about docker and directories--------
+ https://twg.io/blog/things-i-wish-i-knew-about-docker-before-i-started-using-it/
+ ----------------------------------------------------------------------------------
+ 
+ 3Q) Try the above to create container from DOCKERFILE
+ --------------------------------------------------------
+ 4Q) Containerize a node.js application
+ A) You were asked to containerize a nodejs application from git link : https://github.com/linuxacademy/content-dockerquest-spacebones
+ - Go to the nodejs app folder
+ - Create a Dockerfile 
+ -enter the following contents
+  
+  FROM node:7          #(Use this base image node:7 from docker)
+  WORKDIR /app          #(This will be the working directory inside the container)#(This got created automatically vs checking inside the node:7 container which wasnt found)
+  COPY package.json /app   #(Copying from host current directory to docker container directory /app)
+  RUN npm-install
+  COPY . /app               #(Copying everything from current host diretory to docker container directory)
+  CMD node index.js
+  EXPOSE 8081            #(Exposing everything on port 8081 on container)
+  
+  - Enter the command now 
+  "docker build -t baconator:dev . "     #(. is everything inside from present host directory)
+  
+  -Finally, docker run -d -p 60:8081 baconator:dev
+  - Check localhost:60 or (curl localhost:80)
