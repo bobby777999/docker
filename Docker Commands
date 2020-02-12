@@ -44,3 +44,7 @@ A) There is 2 ways you can do
  - exit
  - docker ps -a #(Get the container list and the id of recently create container)
  - docker commit <container id> spacebones:website
+ - To check the image history layers that were added
+  - docker history <imagename>
+  - docker inspect <imagename>
+  
