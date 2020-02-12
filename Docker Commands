@@ -1,3 +1,5 @@
+
+-----Install on Mac------------------------------
 brew cask install docker(if docker wont install normally or cannot connect to daemon)
 
 -----------------------
@@ -11,3 +13,34 @@ docker container ls -a (List container in detail)
 docker container rm <id/name>
 
 Ex: docker run -d --name locahostmac -p 70:80 spacebones/doge   #(Start a container names localhostmac with image spacebones/doge accessble on loaclhost:70)
+
+----Log in to container-----
+docker pull centos:6
+docker run -it centos:6 /bin/bash
+----------------------------------------------------------------------
+1q) You have accessed the website from  spacebones/doge on your local host port80 by doing this
+A)  
+docker pull docker.io/spacebones/doge  #(Pull the image called "docker.io/spacebones/doge")
+
+docker run -d --name locahostmac -p 80:80 spacebones/doge  #(Create container from image and name container "localhostmac", portforward on local host 80 from container port 80)
+
+2Q) Now use a centos:6 image and copy the contents website content of spacebones/doge and spin a container
+A) There is 2 ways you can do 
+ - Log in to container install/download and then commit the image as different name
+ -Docker file 
+ 
+ Lets see the instruction required:
+ - docker pull centos:6     #(6 is tag)
+ - docker run -it centos:6 /bin/bash  #(Running the container in interactive mode, which logs in )
+ - do "yum -y update"
+ - do "yum install httpd git"
+ - do git clone "https://github.com/linuxacademy/content-dockerquest-spacebones.git"
+ - All the web content is inside doge so copy that
+    - cp content-dockerquest-spacebones/doge/* /var/www/html/
+ - To make sure your webiste loads correctly and doesnt go in to apache (apache wont read it, will ignore it when it starts)
+    - mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.bak 
+ - To make sure apache starts when container starts do this command so it starts on boot
+    - chkconfig httpd on
+ - exit
+ - docker ps -a #(Get the container list and the id of recently create container)
+ - docker commit <container id> spacebones:website
