@@ -154,3 +154,11 @@ docker create -v /data --name boneyard spacebones/postgres /bin/true #(-v is vol
 docker run -d --volumes-from boneyard --name bacon spacebones/postgres
 docker run -d --volumes-from boneyard --name tuna spacebones/postgres
 docker run -d --volumes-from boneyard --name cheese spacebones/postgres
+
+docker volume ls
+
+---------------------------Networking Links---------------------------------------------------------------------
+
+
+
+7Q) Create a link between conatiner and database 
