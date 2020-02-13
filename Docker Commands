@@ -137,4 +137,20 @@ A) Create a .dockerignore file and include those file inside (badscript.sh and a
 ex: vi .dockerignore
  - badscript.sh
  *.conf
- ---------------
+ -------------------------Volumes-Data------------------------------------------------------------
+ The container running apps need data to be stored the writable layer on container is not persistent, will be deleted when container
+ gets deleted. So there are several ways to create storage: Volumes, bindmounts, tmpfs #(Volumes is preferable) (Hosted on Docker Host)
+ --------------------------------------------------------------------------------------------------------------------------
+6Q) Create a Data Container(Volume) called boneyeard from image spacebones/postgres. Using the same image create 3 other containers
+named tuna, bacon and cheese that use the same volume (Data Conatiner)
+
+A)- Create a volume first 
+
+docker create -v /data --name boneyard spacebones/postgres /bin/true #(-v is volume, /data is where you are mounting directory insisde container
+/bin/true is it return true when container spins)
+
+-Next create 3 containers and attahc to volume
+
+docker run -d --volumes-from boneyard --name bacon spacebones/postgres
+docker run -d --volumes-from boneyard --name tuna spacebones/postgres
+docker run -d --volumes-from boneyard --name cheese spacebones/postgres
