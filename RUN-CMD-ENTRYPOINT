@@ -1,0 +1,35 @@
+Run
+This command is used to download software, packages. This will create additional layers on top of base image
+ex: apt-get install unzip curl htop wget npm httpd python
+
+
+
+
+
+
+CMD
+Sets default command and parameters which can be overwritten from the command line
+ex: CMD has comand mentioned in docker file. This can be overwritten from CLI like docker run -it ......command
+When the docker container runs
+
+
+
+
+ENTRYPOINT
+
+This will always be executed wont be replaced from CLI
+If you want to replace this use docker run -it --entrypoint=sleep 5
+
+
+
+
+You can use combination of CMD and ENTRYPOINT for one command to be executed and other to be replaced
+
+
+
+
+
+------------------------------------------------------Shell VS Executable--------------------------------------------------------------------------------
+
+
+
