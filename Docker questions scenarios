@@ -1,0 +1,6 @@
+1) How do you add local environment variables to docker container?
+
+docker run -e  ENV_VAR=1 myvalue1 Ubuntu env | grep ENV_VAR
+
+Here, ubuntu is the container that will export your local environmnet variables inside its container. We are switching and printig env variables using env| grep ENV_VAR
+
