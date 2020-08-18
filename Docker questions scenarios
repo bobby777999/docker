@@ -4,3 +4,5 @@ docker run -e  ENV_VAR=1 myvalue1 Ubuntu env | grep ENV_VAR
 
 Here, ubuntu is the container that will export your local environmnet variables inside its container. We are switching and printig env variables using env| grep ENV_VAR
 
+Check docker logs <container name>
+
